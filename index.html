@@ -6,7 +6,7 @@
 
 <title>EROSTBF</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -51,9 +51,9 @@ body {
 }
 
 .hero h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', sans-serif;
   font-size: 72px;
-  letter-spacing: 6px;
+  letter-spacing: 4px;
   font-weight: 400;
 }
 
@@ -130,7 +130,6 @@ body {
 /* ABOUT */
 .about {
   padding: 120px 12%;
-  max-width: 500px;
 }
 
 .about p {
@@ -140,6 +139,18 @@ body {
   letter-spacing: 0.2px;
   margin-bottom: 22px;
   max-width: 480px;
+}
+
+/* DESKTOP AJUSTE */
+@media (min-width: 768px) {
+  .about {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .about p {
+    max-width: 700px;
+  }
 }
 
 /* CONTACT */
