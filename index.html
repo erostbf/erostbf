@@ -27,7 +27,6 @@ body {
   position: fixed;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: transform 0.08s ease;
   z-index: 999;
 }
 
@@ -39,11 +38,23 @@ body {
   padding: 0 12%;
 }
 
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+  width: 100%;
+}
+
+.hero-text {
+  max-width: 420px;
+}
+
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 64px;
-  font-weight: 400;
+  font-size: 72px;
   letter-spacing: 6px;
+  font-weight: 400;
 }
 
 .hero p {
@@ -66,6 +77,21 @@ body {
 
 .btn:hover { opacity: 0.5; }
 
+/* IMAGE */
+.hero-image img {
+  width: 320px;
+  height: 420px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  opacity: 0.95;
+  transition: all 0.6s ease;
+}
+
+.hero-image img:hover {
+  opacity: 1;
+  transform: scale(1.01);
+}
+
 /* PORTFOLIO */
 .portfolio {
   padding: 120px 12%;
@@ -87,7 +113,7 @@ body {
   opacity: 0.85;
 }
 
-/* FADE IN */
+/* FADE */
 .fade {
   opacity: 0;
   transform: translateY(30px);
@@ -127,13 +153,25 @@ body {
 .contact a:hover { opacity: 0.5; }
 
 /* MOBILE */
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+@media (max-width: 768px) {
+
+  .hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
   }
 
   .hero h1 {
-    font-size: 90px;
+    font-size: 48px;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
@@ -144,10 +182,18 @@ body {
 <div class="cursor"></div>
 
 <section class="hero fade">
-  <div>
-    <h1>EROSTBF</h1>
-    <p>Fine Line Tattoo · Buenos Aires</p>
-    <a class="btn" href="https://wa.me/5491132420984">Reservar turno</a>
+  <div class="hero-content">
+    
+    <div class="hero-text">
+      <h1>EROSTBF</h1>
+      <p>Fine Line Tattoo · Buenos Aires</p>
+      <a class="btn" href="https://wa.me/549XXXXXXXXXX">Reservar turno</a>
+    </div>
+
+    <div class="hero-image">
+      <img src="img1.jpg" alt="EROSTBF Tattoo Artist">
+    </div>
+
   </div>
 </section>
 
@@ -158,47 +204,39 @@ body {
     <img src="img4.jpg">
     <img src="img5.jpg">
     <img src="img6.jpg">
+    <img src="img7.jpg">
   </div>
 </section>
 
 <section class="about fade">
   <p>
-    Tatuador de fine line encado en el equilibrio y las composiciones atemporales.
-    Cada pieza la diseñamos para que coexista naturalmente con el cuerpo, no siendo el tatuaje y el cuerpo partes separadas sino un todo.
+    Fine line tattoo artist focused on precision, balance and timeless compositions.
+    Each piece is designed to coexist naturally with the body.
   </p>
 </section>
 
 <section class="contact fade">
-  <a href="https://wa.me/5491132420984">WhatsApp</a>
+  <a href="https://wa.me/549XXXXXXXXXX">WhatsApp</a>
   <a href="https://instagram.com/erostbf.ttt">Instagram</a>
 </section>
 
 <script>
-/* CURSOR */
 const cursor = document.querySelector('.cursor');
 document.addEventListener('mousemove', e => {
   cursor.style.top = e.clientY + 'px';
   cursor.style.left = e.clientX + 'px';
 });
 
-/* FADE IN ON SCROLL */
 const faders = document.querySelectorAll('.fade');
 
-const appearOptions = {
-  threshold: 0.2
-};
-
-const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if(!entry.isIntersecting) return;
+    if (!entry.isIntersecting) return;
     entry.target.classList.add('visible');
-    observer.unobserve(entry.target);
   });
-}, appearOptions);
-
-faders.forEach(fader => {
-  appearOnScroll.observe(fader);
 });
+
+faders.forEach(el => observer.observe(el));
 </script>
 
 </body>
