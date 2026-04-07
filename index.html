@@ -4,87 +4,105 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>eros tattoo</title>
+<title>EROSTBF</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #ffffff;
+  background: #fff;
   color: #111;
-  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* CURSOR */
+.cursor {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease;
+  z-index: 999;
 }
 
 /* HERO */
 .hero {
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 10%;
+  align-items: center;
+  padding: 0 12%;
 }
 
 .hero h1 {
-  font-size: 42px;
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
   font-weight: 400;
-  letter-spacing: 4px;
+  letter-spacing: 6px;
 }
 
 .hero p {
-  margin-top: 10px;
-  font-size: 14px;
+  margin-top: 12px;
+  font-size: 13px;
   color: #777;
 }
 
 .btn {
-  margin-top: 30px;
+  margin-top: 35px;
   display: inline-block;
-  padding: 10px 22px;
-  border: 1px solid #111;
+  font-size: 12px;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #111;
   text-decoration: none;
   color: #111;
-  font-size: 13px;
-  transition: all 0.3s ease;
+  padding-bottom: 3px;
+  transition: opacity .3s ease;
 }
 
-.btn:hover {
-  background: #111;
-  color: #fff;
-}
+.btn:hover { opacity: 0.5; }
 
 /* PORTFOLIO */
 .portfolio {
-  padding: 80px 10%;
+  padding: 120px 12%;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 20px;
 }
 
 .grid img {
   width: 100%;
-  height: auto;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform .6s ease, opacity .6s ease;
 }
 
 .grid img:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   opacity: 0.85;
+}
+
+/* FADE IN */
+.fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.fade.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ABOUT */
 .about {
-  padding: 80px 10%;
-  max-width: 600px;
+  padding: 120px 12%;
+  max-width: 500px;
 }
 
 .about p {
@@ -94,16 +112,19 @@ body {
 
 /* CONTACT */
 .contact {
-  padding: 80px 10%;
+  padding: 120px 12%;
 }
 
 .contact a {
   display: block;
+  font-size: 13px;
   margin-top: 10px;
-  font-size: 14px;
-  color: #111;
   text-decoration: none;
+  color: #111;
+  transition: opacity .3s;
 }
+
+.contact a:hover { opacity: 0.5; }
 
 /* MOBILE */
 @media (min-width: 768px) {
@@ -112,24 +133,25 @@ body {
   }
 
   .hero h1 {
-    font-size: 60px;
+    font-size: 90px;
   }
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>EROSTBF</h1>
-  <p>Fine Line Tattoo · Buenos Aires</p>
-  <a class="btn" href="https://wa.me/549XXXXXXXXXX">Reservar turno</a>
+<div class="cursor"></div>
+
+<section class="hero fade">
+  <div>
+    <h1>EROSTBF</h1>
+    <p>Fine Line Tattoo · Buenos Aires</p>
+    <a class="btn" href="https://wa.me/549XXXXXXXXXX">Reservar turno</a>
+  </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section class="portfolio">
+<section class="portfolio fade">
   <div class="grid">
     <img src="img1.jpg">
     <img src="img2.jpg">
@@ -140,19 +162,45 @@ body {
   </div>
 </section>
 
-<!-- QUIÉN SOY -->
-<section class="about">
+<section class="about fade">
   <p>
-    Tatuador de línea fina y composiciones minimalistas.
-    Trabajo con diseños personalizados enfocados en precisión, equilibrio y detalle.
+    Fine line tattoo artist focused on precision, balance and timeless compositions.
+    Each piece is designed to coexist naturally with the body.
   </p>
 </section>
 
-<!-- CONTACTO -->
-<section class="contact">
+<section class="contact fade">
   <a href="https://wa.me/5491132420984">WhatsApp</a>
   <a href="https://instagram.com/erostbf.ttt">Instagram</a>
 </section>
+
+<script>
+/* CURSOR */
+const cursor = document.querySelector('.cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.top = e.clientY + 'px';
+  cursor.style.left = e.clientX + 'px';
+});
+
+/* FADE IN ON SCROLL */
+const faders = document.querySelectorAll('.fade');
+
+const appearOptions = {
+  threshold: 0.2
+};
+
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+  entries.forEach(entry => {
+    if(!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  });
+}, appearOptions);
+
+faders.forEach(fader => {
+  appearOnScroll.observe(fader);
+});
+</script>
 
 </body>
 </html>
