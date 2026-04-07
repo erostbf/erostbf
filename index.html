@@ -57,10 +57,11 @@ body {
   font-weight: 400;
 }
 
-.hero p {
-  margin-top: 12px;
-  font-size: 13px;
-  color: #777;
+.subtitle {
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #888;
 }
 
 .btn {
@@ -79,9 +80,10 @@ body {
 
 /* IMAGE */
 .hero-image img {
-  width: 320px;
-  height: 420px;
+  width: 340px;
+  height: 460px;
   object-fit: cover;
+  object-position: center 20%;
   filter: grayscale(100%);
   opacity: 0.95;
   transition: all 0.6s ease;
@@ -94,13 +96,13 @@ body {
 
 /* PORTFOLIO */
 .portfolio {
-  padding: 120px 12%;
+  padding: 160px 12%;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 12px;
 }
 
 .grid img {
@@ -134,6 +136,10 @@ body {
 .about p {
   font-size: 14px;
   color: #444;
+  line-height: 1.9;
+  letter-spacing: 0.2px;
+  margin-bottom: 22px;
+  max-width: 480px;
 }
 
 /* CONTACT */
@@ -186,7 +192,7 @@ body {
     
     <div class="hero-text">
       <h1>EROSTBF</h1>
-      <p>Fine Line Tattoo · Buenos Aires</p>
+      <p class="subtitle">Fine Line Tattoo · Buenos Aires</p>
       <a class="btn" href="https://wa.me/5491132420984">Reservar turno</a>
     </div>
 
@@ -209,10 +215,21 @@ body {
 <section class="about fade">
   <p>
     Tatuador de fine line enfocado en la precisión, el equilibrio y la composición atemporal.
-    
-    Cada pieza es diseñada para coexistir naturalmente con el cuerpo, no pensando el tatuaje como algo ajeno y separado del cuerpo sino siendo parte de un todo.
-    
-    Mi aproximación al tatuaje parte de pensarlo como algo eterno y atemporal, trato de que el diseño elegido vaya con la persona de manera tal que no exista la posibilidad del arrepentimiento y que sea un tatuaje que pueda llevarse bien con todo aspecto de nuestras vidas, algo que quede bien estando desnudos, vestidos ocasionalmente, vestidos formalmente, o de fiesta.
+  </p>
+
+  <p>
+    Cada pieza es diseñada para coexistir naturalmente con el cuerpo, no como algo ajeno,
+    sino como parte de un todo.
+  </p>
+
+  <p>
+    Mi aproximación al tatuaje parte de pensarlo como algo eterno y atemporal.
+    Busco que cada diseño acompañe a la persona en todos los contextos de su vida.
+  </p>
+
+  <p>
+    Un tatuaje que funcione en lo cotidiano, en lo formal, en lo íntimo.
+    Algo que permanezca y evolucione con quien lo lleva.
   </p>
 </section>
 
