@@ -1,57 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>EROSTBF Tattoo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      text-align: center;
-    }
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: url('https://via.placeholder.com/1200') center/cover;
-    }
-    h1 {
-      font-size: 48px;
-      letter-spacing: 2px;
-    }
-    .btn {
-      margin-top: 20px;
-      padding: 12px 24px;
-      border: 1px solid white;
-      color: white;
-      text-decoration: none;
-    }
-    .portfolio img {
-      width: 100%;
-      max-width: 300px;
-      margin: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>eros tattoo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #111;
+  line-height: 1.5;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10%;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: 4px;
+}
+
+.hero p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #777;
+}
+
+.btn {
+  margin-top: 30px;
+  display: inline-block;
+  padding: 10px 22px;
+  border: 1px solid #111;
+  text-decoration: none;
+  color: #111;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* PORTFOLIO */
+.portfolio {
+  padding: 80px 10%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.grid img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.grid img:hover {
+  transform: scale(1.03);
+  opacity: 0.85;
+}
+
+/* ABOUT */
+.about {
+  padding: 80px 10%;
+  max-width: 600px;
+}
+
+.about p {
+  font-size: 14px;
+  color: #444;
+}
+
+/* CONTACT */
+.contact {
+  padding: 80px 10%;
+}
+
+.contact a {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #111;
+  text-decoration: none;
+}
+
+/* MOBILE */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero h1 {
+    font-size: 60px;
+  }
+}
+</style>
+
 </head>
 
 <body>
 
-  <section class="hero">
-    <h1>EROSTBF</h1>
-    <p>Fine Line Tattoo - Buenos Aires</p>
-    <a class="btn" href="https://wa.me/549XXXXXXXXXX">Reservar turno</a>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <h1>EROSTBF</h1>
+  <p>Fine Line Tattoo · Buenos Aires</p>
+  <a class="btn" href="https://wa.me/549XXXXXXXXXX">Reservar turno</a>
+</section>
 
-  <section class="portfolio">
-    <h2>Portfolio</h2>
-    <img src="https://via.placeholder.com/300">
-    <img src="https://via.placeholder.com/300">
-    <img src="https://via.placeholder.com/300">
-  </section>
+<!-- PORTFOLIO -->
+<section class="portfolio">
+  <div class="grid">
+    <img src="img1.jpg">
+    <img src="img2.jpg">
+    <img src="img3.jpg">
+    <img src="img4.jpg">
+    <img src="img5.jpg">
+    <img src="img6.jpg">
+  </div>
+</section>
+
+<!-- QUIÉN SOY -->
+<section class="about">
+  <p>
+    Tatuador de línea fina y composiciones minimalistas.
+    Trabajo con diseños personalizados enfocados en precisión, equilibrio y detalle.
+  </p>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact">
+  <a href="https://wa.me/5491132420984">WhatsApp</a>
+  <a href="https://instagram.com/erostbf.ttt">Instagram</a>
+</section>
 
 </body>
 </html>
