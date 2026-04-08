@@ -33,9 +33,7 @@ body {
   width: 100%;
 }
 
-.hero-text {
-  max-width: 420px;
-}
+.hero-text { max-width: 420px; }
 
 .hero h1 {
   font-size: 64px;
@@ -64,7 +62,7 @@ body {
 
 .btn:hover { opacity: 0.5; }
 
-/* IMAGE */
+/* HERO IMAGE (sin parallax) */
 .hero-image img {
   width: 320px;
   height: 440px;
@@ -72,12 +70,6 @@ body {
   object-position: center 20%;
   filter: grayscale(100%);
   opacity: 0.95;
-  transition: transform .8s ease, opacity .8s ease;
-}
-
-.hero-image img:hover {
-  opacity: 1;
-  transform: scale(1.02);
 }
 
 /* PORTFOLIO */
@@ -85,21 +77,35 @@ body {
   padding: 140px 10%;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+.item {
+  position: relative;
+  margin-bottom: 80px;
 }
 
-.grid img {
+.item img {
   width: 100%;
+  display: block;
   transition: transform .8s ease, opacity .8s ease;
+  will-change: transform;
 }
 
-.grid img:hover {
+.item img:hover {
   transform: scale(1.015);
-  opacity: 0.85;
+  opacity: 0.9;
 }
+
+/* TEXTO CONCEPTUAL */
+.label {
+  position: absolute;
+  top: 50%;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #666;
+  transform: translateY(-50%);
+}
+
+.label.left { left: -80px; }
+.label.right { right: -80px; }
 
 /* ABOUT */
 .about {
@@ -161,16 +167,18 @@ body {
     height: auto;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
+  .label {
+    position: static;
+    transform: none;
+    margin-top: 8px;
   }
 }
 
-/* FADE SUAVE PRO */
+/* FADE SUAVE */
 .fade {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 1.6s ease, transform 1.6s ease;
+  transition: opacity 1.3s ease, transform 1.3s ease;
 }
 
 .fade.visible {
@@ -198,19 +206,34 @@ body {
   </div>
 </section>
 
-<section class="portfolio fade">
-  <div class="grid">
+<section class="portfolio">
+
+  <div class="item fade">
     <img src="img2.jpg">
-    <img src="img3.jpg">
-    <img src="img4.jpg">
-    <img src="img5.jpg">
+    <span class="label left">VALENCIA</span>
   </div>
+
+  <div class="item fade">
+    <img src="img3.jpg">
+    <span class="label right">ETERNIDAD</span>
+  </div>
+
+  <div class="item fade">
+    <img src="img4.jpg">
+    <span class="label left">MEMORIA</span>
+  </div>
+
+  <div class="item fade">
+    <img src="img5.jpg">
+    <span class="label right">Composición</span>
+  </div>
+
 </section>
 
 <section class="about fade">
   <p>Tatuador de fine line enfocado en la precisión, el equilibrio y la composición atemporal.</p>
-  <p>Cada pieza es diseñada para coexistir naturalmente con el cuerpo, como parte de un todo.</p>
-  <p>Mi enfoque busca crear tatuajes que acompañen a la persona en todos los contextos de su vida.</p>
+  <p>Cada pieza es diseñada para coexistir naturalmente con el cuerpo, no como algo ajeno y separado, sino como parte de un todo.</p>
+  <p>Mi enfoque busca diseñar tatuajes que acompañen a la persona en todos los contextos de su vida. En lo cotidiano, en lo profesional, en la intimidad.</p>
   <p>Diseños pensados para permanecer, evolucionar y sentirse propios en el tiempo.</p>
 </section>
 
@@ -220,6 +243,7 @@ body {
 </section>
 
 <script>
+/* FADE */
 const elements = document.querySelectorAll('.fade');
 
 const observer = new IntersectionObserver(entries => {
@@ -230,11 +254,21 @@ const observer = new IntersectionObserver(entries => {
       entry.target.classList.remove('visible');
     }
   });
-}, {
-  threshold: 0.2
-});
+}, { threshold: 0.2 });
 
 elements.forEach(el => observer.observe(el));
+
+/* PARALLAX SUAVE */
+const items = document.querySelectorAll('.item img');
+
+window.addEventListener('scroll', () => {
+  items.forEach(img => {
+    const rect = img.getBoundingClientRect();
+    const speed = 0.05; // ultra sutil
+    const offset = rect.top * speed;
+    img.style.transform = `translateY(${offset}px)`;
+  });
+});
 </script>
 
 </body>
