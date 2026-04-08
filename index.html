@@ -29,7 +29,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 60px;
   width: 100%;
 }
 
@@ -61,16 +60,6 @@ body {
 }
 
 .btn:hover { opacity: 0.5; }
-
-/* HERO IMAGE (sin parallax) */
-.hero-image img {
-  width: 320px;
-  height: 440px;
-  object-fit: cover;
-  object-position: center 20%;
-  filter: grayscale(100%);
-  opacity: 0.95;
-}
 
 /* PORTFOLIO */
 .portfolio {
@@ -112,6 +101,17 @@ body {
   padding: 120px 10%;
 }
 
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.about-text {
+  flex: 1;
+}
+
 .about p {
   font-size: 14px;
   color: #444;
@@ -121,15 +121,30 @@ body {
   max-width: 500px;
 }
 
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.about-image img {
+  width: 320px;
+  height: 440px;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: grayscale(100%);
+  opacity: 0.95;
+}
+
 /* DESKTOP */
 @media (min-width: 768px) {
   .about {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
   .about p {
-    max-width: 700px;
+    max-width: 600px;
   }
 }
 
@@ -162,15 +177,24 @@ body {
     font-size: 42px;
   }
 
-  .hero-image img {
-    width: 100%;
-    height: auto;
-  }
-
   .label {
     position: static;
     transform: none;
     margin-top: 8px;
+  }
+
+  .about-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-image {
+    justify-content: flex-start;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -197,10 +221,6 @@ body {
       <h1>EROSTBF</h1>
       <p class="subtitle">Fine Line Tattoo · Buenos Aires</p>
       <a class="btn" href="https://wa.me/5491132420984">Reservar turno</a>
-    </div>
-
-    <div class="hero-image">
-      <img src="img1.jpg">
     </div>
 
   </div>
@@ -231,10 +251,20 @@ body {
 </section>
 
 <section class="about fade">
-  <p>Tatuador de fine line enfocado en la precisión, el equilibrio y la composición atemporal.</p>
-  <p>Cada pieza es diseñada para coexistir naturalmente con el cuerpo, pesada no como algo ajeno y separado, sino como parte de un todo.</p>
-  <p>Mi enfoque busca diseñar tatuajes que acompañen a la persona en todos los contextos de su vida. En lo cotidiano, en lo profesional, en la intimidad.</p>
-  <p>Diseños pensados para permanecer, evolucionar y sentirse propios en el tiempo.</p>
+  <div class="about-content">
+
+    <div class="about-text">
+      <p>Tatuador de fine line enfocado en la precisión, el equilibrio y la composición atemporal.</p>
+      <p>Cada pieza es diseñada para coexistir naturalmente con el cuerpo, pensada no como algo ajeno y separado, sino como parte de un todo.</p>
+      <p>Mi enfoque busca diseñar tatuajes que acompañen a la persona en todos los contextos de su vida. En lo cotidiano, en lo profesional, en la intimidad.</p>
+      <p>Diseños pensados para permanecer, evolucionar y sentirse propios en el tiempo.</p>
+    </div>
+
+    <div class="about-image">
+      <img src="img1.jpg">
+    </div>
+
+  </div>
 </section>
 
 <section class="contact fade">
@@ -264,7 +294,7 @@ const items = document.querySelectorAll('.item img');
 window.addEventListener('scroll', () => {
   items.forEach(img => {
     const rect = img.getBoundingClientRect();
-    const speed = 0.05; // ultra sutil
+    const speed = 0.05;
     const offset = rect.top * speed;
     img.style.transform = `translateY(${offset}px)`;
   });
