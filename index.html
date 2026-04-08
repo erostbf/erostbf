@@ -62,7 +62,7 @@ body {
 
 .btn:hover { opacity: 0.5; }
 
-/* HERO IMAGE (sin parallax) */
+/* HERO IMAGE */
 .hero-image img {
   width: 320px;
   height: 440px;
@@ -80,6 +80,7 @@ body {
 .item {
   position: relative;
   margin-bottom: 80px;
+  overflow: visible;
 }
 
 .item img {
@@ -94,18 +95,42 @@ body {
   opacity: 0.9;
 }
 
-/* TEXTO CONCEPTUAL */
+/* LABELS */
 .label {
   position: absolute;
   top: 50%;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: #666;
-  transform: translateY(-50%);
+  
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  
+  color: rgba(0,0,0,0.18);
+  pointer-events: none;
+  
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+  
+  will-change: transform;
+  mix-blend-mode: multiply;
 }
 
-.label.left { left: -80px; }
-.label.right { right: -80px; }
+/* posiciones iniciales (con leve offset) */
+.label.left {
+  left: -120px;
+  transform: translateY(-50%) translateX(-20px);
+}
+
+.label.right {
+  right: -120px;
+  transform: translateY(-50%) translateX(20px);
+}
+
+/* cuando aparece */
+.item.visible .label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
 
 /* ABOUT */
 .about {
@@ -168,17 +193,30 @@ body {
   }
 
   .label {
-    position: static;
-    transform: none;
-    margin-top: 8px;
+    position: relative;
+    top: auto;
+    transform: none !important;
+    
+    font-size: 18px;
+    letter-spacing: 4px;
+    
+    margin-top: 10px;
+    color: rgba(0,0,0,0.25);
+    opacity: 1;
+  }
+
+  .label.left,
+  .label.right {
+    left: auto;
+    right: auto;
   }
 }
 
-/* FADE SUAVE */
+/* FADE */
 .fade {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.3s ease, transform 1.3s ease;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .fade.visible {
@@ -210,22 +248,22 @@ body {
 
   <div class="item fade">
     <img src="img2.jpg">
-    <span class="label left">VALENCIA</span>
+    <span class="label right">VALENCIA</span>
   </div>
 
   <div class="item fade">
     <img src="img3.jpg">
-    <span class="label right">ETERNIDAD</span>
+    <span class="label left">ETERNIDAD</span>
   </div>
 
   <div class="item fade">
     <img src="img4.jpg">
-    <span class="label left">MEMORIA</span>
+    <span class="label right">MEMORIA</span>
   </div>
 
   <div class="item fade">
     <img src="img5.jpg">
-    <span class="label right">Composición</span>
+    <span class="label left">COMPOSICIÓN</span>
   </div>
 
 </section>
@@ -258,16 +296,30 @@ const observer = new IntersectionObserver(entries => {
 
 elements.forEach(el => observer.observe(el));
 
-/* PARALLAX SUAVE */
-const items = document.querySelectorAll('.item img');
+/* PARALLAX IMÁGENES */
+const images = document.querySelectorAll('.item img');
+
+/* PARALLAX TEXTOS */
+const labels = document.querySelectorAll('.label');
 
 window.addEventListener('scroll', () => {
-  items.forEach(img => {
+
+  images.forEach(img => {
     const rect = img.getBoundingClientRect();
-    const speed = 0.05; // ultra sutil
+    const speed = 0.05;
     const offset = rect.top * speed;
     img.style.transform = `translateY(${offset}px)`;
   });
+
+  labels.forEach(label => {
+    const rect = label.getBoundingClientRect();
+    const speed = 0.02; // más sutil que las imágenes
+    const offset = rect.top * speed;
+
+    const base = -50; // mantiene centrado vertical
+    label.style.transform = `translateY(calc(${base}% + ${offset}px))`;
+  });
+
 });
 </script>
 
