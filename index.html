@@ -183,17 +183,25 @@ body {
     margin-top: 8px;
   }
 
+  /* ABOUT igual que desktop */
   .about-content {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .about-text {
+    flex: 1.2;
   }
 
   .about-image {
-    justify-content: flex-start;
+    flex: 0.8;
+    justify-content: flex-end;
   }
 
   .about-image img {
     width: 100%;
+    max-width: 160px;
     height: auto;
   }
 }
@@ -230,7 +238,7 @@ body {
 
   <div class="item fade">
     <img src="img2.jpg">
-    <span class="label left">RECUERDO</span>
+    <span class="label left">VALENCIA</span>
   </div>
 
   <div class="item fade">
