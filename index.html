@@ -68,7 +68,7 @@ img {
 
 /* PORTFOLIO */
 .portfolio {
-  padding: 140px 10%;
+  padding: 140px 6%;
 }
 
 .item {
@@ -77,9 +77,10 @@ img {
 
 .item img {
   width: 100%;
+  height: 420px; /* 👈 TODAS IGUALES */
+  object-fit: cover; /* 👈 recorte elegante */
   display: block;
   transition: transform .8s ease, opacity .8s ease;
-  will-change: transform;
 }
 
 .item img:hover {
@@ -87,18 +88,13 @@ img {
   opacity: 0.9;
 }
 
-/* LABELS */
+/* LABEL */
 .label {
-  position: absolute;
-  top: 50%;
+  margin-top: 10px;
   font-size: 12px;
   letter-spacing: 2px;
   color: #666;
-  transform: translateY(-50%);
 }
-
-.label.left { left: -60px; }
-.label.right { right: -60px; }
 
 /* ABOUT */
 .about {
@@ -112,9 +108,7 @@ img {
   gap: 80px;
 }
 
-.about-text {
-  flex: 1;
-}
+.about-text { flex: 1; }
 
 .about p {
   font-size: 14px;
@@ -139,26 +133,15 @@ img {
   opacity: 0.95;
 }
 
-/* DESKTOP - 3 COLUMNAS */
+/* DESKTOP */
 @media (min-width: 768px) {
 
   .portfolio {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 👈 3 columnas */
-    gap: 50px;
-    max-width: 1100px;
+    grid-template-columns: repeat(2, 1fr); /* 👈 2 columnas */
+    gap: 40px;
+    max-width: 1400px; /* 👈 más grande */
     margin: 0 auto;
-  }
-
-  .item {
-    margin: 0;
-  }
-
-  /* labels debajo (más limpio en grid) */
-  .label {
-    position: static;
-    transform: none;
-    margin-top: 10px;
   }
 
   .about {
@@ -187,7 +170,7 @@ img {
 
 .contact a:hover { opacity: 0.5; }
 
-/* MOBILE (SIN CAMBIOS) */
+/* MOBILE */
 @media (max-width: 768px) {
 
   .hero-content {
@@ -208,10 +191,8 @@ img {
     margin-bottom: 80px;
   }
 
-  .label {
-    position: static;
-    transform: none;
-    margin-top: 8px;
+  .item img {
+    height: auto; /* 👈 vuelve a natural en mobile */
   }
 
   .about-content {
