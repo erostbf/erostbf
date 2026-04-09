@@ -17,9 +17,9 @@ body {
   color: #111;
 }
 
-/* GRAYSCALE + AJUSTE FINO */
+/* SOLO GRAYSCALE */
 img {
-  filter: grayscale(70%) contrast(95%) brightness(98%);
+  filter: grayscale(100%);
 }
 
 /* HERO */
@@ -277,7 +277,6 @@ img {
 </section>
 
 <script>
-/* FADE */
 const elements = document.querySelectorAll('.fade');
 
 const observer = new IntersectionObserver(entries => {
@@ -292,7 +291,6 @@ const observer = new IntersectionObserver(entries => {
 
 elements.forEach(el => observer.observe(el));
 
-/* PARALLAX SUAVE */
 const items = document.querySelectorAll('.item img');
 
 window.addEventListener('scroll', () => {
