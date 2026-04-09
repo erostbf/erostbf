@@ -17,7 +17,7 @@ body {
   color: #111;
 }
 
-/* SOLO GRAYSCALE */
+/* GRAYSCALE */
 img {
   filter: grayscale(100%);
 }
@@ -73,7 +73,6 @@ img {
 
 .item {
   position: relative;
-  margin-bottom: 80px;
 }
 
 .item img {
@@ -84,11 +83,11 @@ img {
 }
 
 .item img:hover {
-  transform: scale(1.015);
+  transform: scale(1.02);
   opacity: 0.9;
 }
 
-/* TEXTO CONCEPTUAL */
+/* LABELS */
 .label {
   position: absolute;
   top: 50%;
@@ -98,8 +97,8 @@ img {
   transform: translateY(-50%);
 }
 
-.label.left { left: -80px; }
-.label.right { right: -80px; }
+.label.left { left: -60px; }
+.label.right { right: -60px; }
 
 /* ABOUT */
 .about {
@@ -140,8 +139,28 @@ img {
   opacity: 0.95;
 }
 
-/* DESKTOP */
+/* DESKTOP - 3 COLUMNAS */
 @media (min-width: 768px) {
+
+  .portfolio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 👈 3 columnas */
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .item {
+    margin: 0;
+  }
+
+  /* labels debajo (más limpio en grid) */
+  .label {
+    position: static;
+    transform: none;
+    margin-top: 10px;
+  }
+
   .about {
     max-width: 1000px;
     margin: 0 auto;
@@ -168,7 +187,7 @@ img {
 
 .contact a:hover { opacity: 0.5; }
 
-/* MOBILE */
+/* MOBILE (SIN CAMBIOS) */
 @media (max-width: 768px) {
 
   .hero-content {
@@ -179,6 +198,14 @@ img {
 
   .hero h1 {
     font-size: 42px;
+  }
+
+  .portfolio {
+    display: block;
+  }
+
+  .item {
+    margin-bottom: 80px;
   }
 
   .label {
@@ -202,7 +229,7 @@ img {
   }
 }
 
-/* FADE SUAVE */
+/* FADE */
 .fade {
   opacity: 0;
   transform: translateY(40px);
@@ -220,13 +247,11 @@ img {
 
 <section class="hero fade">
   <div class="hero-content">
-    
     <div class="hero-text">
       <h1>EROSTBF</h1>
       <p class="subtitle">Fine Line Tattoo · Buenos Aires</p>
       <a class="btn" href="https://wa.me/5491132420984">Reservar turno</a>
     </div>
-
   </div>
 </section>
 
@@ -234,22 +259,22 @@ img {
 
   <div class="item fade">
     <img src="img2.jpg">
-    <span class="label left">RECUERDO</span>
+    <span class="label">RECUERDO</span>
   </div>
 
   <div class="item fade">
     <img src="img3.jpg">
-    <span class="label right">ETERNIDAD</span>
+    <span class="label">ETERNIDAD</span>
   </div>
 
   <div class="item fade">
     <img src="img4.jpg">
-    <span class="label left">MEMORIA</span>
+    <span class="label">MEMORIA</span>
   </div>
 
   <div class="item fade">
     <img src="img5.jpg">
-    <span class="label right">COMPOSICIÓN</span>
+    <span class="label">COMPOSICIÓN</span>
   </div>
 
 </section>
