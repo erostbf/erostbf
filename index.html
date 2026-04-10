@@ -17,7 +17,6 @@ body {
   color: #111;
 }
 
-/* GRAYSCALE */
 img {
   filter: grayscale(100%);
 }
@@ -73,19 +72,30 @@ img {
 
 .item {
   position: relative;
+  overflow: hidden; /* evita que el parallax desborde */
 }
 
 .item img {
   width: 100%;
-  height: 420px; /* 👈 TODAS IGUALES */
-  object-fit: cover; /* 👈 recorte elegante */
+  height: 420px;
+  object-fit: cover;
   display: block;
-  transition: transform .8s ease, opacity .8s ease;
+  transition: opacity .8s ease;
+  will-change: transform; /* optimiza compositing */
 }
 
 .item img:hover {
-  transform: scale(1.02);
   opacity: 0.9;
+}
+
+/* hover scale solo en desktop */
+@media (min-width: 769px) {
+  .item img {
+    transition: transform .8s ease, opacity .8s ease;
+  }
+  .item img:hover {
+    transform: scale(1.02);
+  }
 }
 
 /* LABEL */
@@ -94,6 +104,7 @@ img {
   font-size: 12px;
   letter-spacing: 2px;
   color: #666;
+  display: block;
 }
 
 /* ABOUT */
@@ -138,9 +149,9 @@ img {
 
   .portfolio {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 👈 2 columnas */
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
-    max-width: 1400px; /* 👈 más grande */
+    max-width: 1400px;
     margin: 0 auto;
   }
 
@@ -185,14 +196,16 @@ img {
 
   .portfolio {
     display: block;
+    padding: 80px 6%;
   }
 
   .item {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
 
   .item img {
-    height: auto; /* 👈 vuelve a natural en mobile */
+    height: auto;
+    transform: none !important; /* desactiva parallax en mobile */
   }
 
   .about-content {
@@ -213,8 +226,8 @@ img {
 /* FADE */
 .fade {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.3s ease, transform 1.3s ease;
+  transform: translateY(28px); /* recorrido más corto = más suave */
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .fade.visible {
@@ -239,31 +252,31 @@ img {
 <section class="portfolio">
 
   <div class="item fade">
-    <img src="img2.jpg">
+    <img src="img2.jpg" alt="">
     <span class="label">01</span>
   </div>
 
   <div class="item fade">
-    <img src="img3.jpg">
+    <img src="img3.jpg" alt="">
     <span class="label">02</span>
   </div>
 
   <div class="item fade">
-    <img src="img4.jpg">
+    <img src="img4.jpg" alt="">
     <span class="label">03</span>
   </div>
 
   <div class="item fade">
-    <img src="img5.jpg">
+    <img src="img5.jpg" alt="">
     <span class="label">04</span>
   </div>
 
 </section>
 
-<section class="about fade">
+<section class="about">
   <div class="about-content">
 
-    <div class="about-text">
+    <div class="about-text fade">
       <p>/.</p>
       <p>Tatuador de fine line enfocado en la precisión, el equilibrio y la composición atemporal.</p>
       <p>Cada pieza es diseñada para coexistir naturalmente con el cuerpo — no como algo ajeno, sino como parte de un todo.</p>
@@ -271,43 +284,54 @@ img {
       <p>Esta página está en construcción, al igual que yo. Gracias por pasar.</p>
     </div>
 
-    <div class="about-image">
-      <img src="img1.jpg">
+    <div class="about-image fade" style="transition-delay: 0.2s;">
+      <img src="img1.jpg" alt="">
     </div>
 
   </div>
 </section>
 
-<section class="contact fade">
+<section class="contact">
   <a href="https://wa.me/5491132420984">WhatsApp</a>
   <a href="https://instagram.com/erostbf.ttt">Instagram</a>
 </section>
 
 <script>
-const elements = document.querySelectorAll('.fade');
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    } else {
-      entry.target.classList.remove('visible');
-    }
-  });
-}, { threshold: 0.2 });
+  /* FADE — umbral más bajo en mobile para que dispare antes */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: isMobile ? 0.05 : 0.2 });
 
-elements.forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
-const items = document.querySelectorAll('.item img');
+  /* PARALLAX — solo en desktop */
+  if (!isMobile) {
+    const items = document.querySelectorAll('.item img');
 
-window.addEventListener('scroll', () => {
-  items.forEach(img => {
-    const rect = img.getBoundingClientRect();
-    const speed = 0.05;
-    const offset = rect.top * speed;
-    img.style.transform = `translateY(${offset}px)`;
-  });
-});
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          items.forEach(img => {
+            const rect = img.getBoundingClientRect();
+            const offset = rect.top * 0.05;
+            img.style.transform = `translateY(${offset}px)`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
 </script>
 
 </body>
