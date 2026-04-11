@@ -72,7 +72,7 @@ img {
 
 .item {
   position: relative;
-  overflow: hidden; /* evita que el parallax desborde */
+  overflow: hidden;
 }
 
 .item img {
@@ -81,14 +81,13 @@ img {
   object-fit: cover;
   display: block;
   transition: opacity .8s ease;
-  will-change: transform; /* optimiza compositing */
+  will-change: transform;
 }
 
 .item img:hover {
   opacity: 0.9;
 }
 
-/* hover scale solo en desktop */
 @media (min-width: 769px) {
   .item img {
     transition: transform .8s ease, opacity .8s ease;
@@ -128,6 +127,18 @@ img {
   letter-spacing: 0.2px;
   margin-bottom: 24px;
   max-width: 500px;
+}
+
+/* GRATITUDE */
+.gratitude {
+  border-left: 1px solid #bbb;
+  padding-left: 20px;
+  margin: 4px 0 24px;
+}
+
+.gratitude p {
+  color: #888;
+  margin-bottom: 0;
 }
 
 .about-image {
@@ -205,7 +216,7 @@ img {
 
   .item img {
     height: auto;
-    transform: none !important; /* desactiva parallax en mobile */
+    transform: none !important;
   }
 
   .about-content {
@@ -226,7 +237,7 @@ img {
 /* FADE */
 .fade {
   opacity: 0;
-  transform: translateY(28px); /* recorrido más corto = más suave */
+  transform: translateY(28px);
   transition: opacity 1s ease, transform 1s ease;
 }
 
@@ -297,8 +308,10 @@ img {
       <p>Cada pieza es diseñada para coexistir naturalmente con el cuerpo — no como algo ajeno, sino como parte de un todo.</p>
       <p>Mi enfoque busca que el tatuaje te acompañe en todos los aspectos de tu vida: en lo cotidiano, en lo profesional, en la intimidad. Sea mi diseño, el tuyo, o algo construido en conjunto — está pensado para permanecer, evolucionar y sentirse propio con el tiempo.</p>
       <p>El tatuaje en mi vida muchas veces fue visto como un privilegio y es algo que no pretendo perpetuar. Tuve la suerte de cruzarme con artistas que comparten esa mirada y me ayudaron a concretar esas ideas que tenía en mi piel.</p>
-      <p>Gracias, Carolina, por regalarme mi primer tatuaje.</p>
-      <p>Gracias, Camila, por ser mi mentora.</p>
+      <div class="gratitude">
+        <p>Gracias, Carolina, por regalarme mi primer tatuaje.</p>
+        <p>Gracias, Camila, por ser mi mentora.</p>
+      </div>
       <p>Tengo la convicción de que — al tatuarnos, la tinta y los trazos nos traen muchas emociones y un estado de bienestar que es invaluable. Por eso mismo, pongo mis herramientas y mis ganas a disposición para que podamos sentir ese bienestar sin que eso signifique dejar de lado otras cosas o implique un sacrificio económico.</p>
       <p>Si te gusta lo que hago, o si tenés una idea dando vueltas y la querés plasmar, no dudes en escribirme!</p>
       <p>Esta página está en construcción, al igual que yo. Gracias por pasar.</p>
@@ -319,7 +332,6 @@ img {
 <script>
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-  /* FADE — umbral más bajo en mobile para que dispare antes */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -332,10 +344,8 @@ img {
 
   document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
-  /* PARALLAX — solo en desktop */
   if (!isMobile) {
     const items = document.querySelectorAll('.item img');
-
     let ticking = false;
 
     window.addEventListener('scroll', () => {
